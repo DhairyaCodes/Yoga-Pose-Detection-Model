@@ -3,7 +3,7 @@
 This repository contains the yoga pose detection model used in **[YogZen](https://github.com/DhairyaCodes/Yogzen_app)**, a wellness app designed to help users practice yoga with AI-powered guidance. YogZen leverages pose recognition technology to provide real-time feedback and gamify the yoga experience.
 
 ## Model Details
-- **Base Model**: MobileNetV2 (pre-trained on ImageNet)
+- **Base Model**: MobileNetV2
 - **Input Shape**: (256, 256, 3)
 - **Accuracy Achieved**: 96.81%
 
