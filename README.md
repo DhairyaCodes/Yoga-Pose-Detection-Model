@@ -1,25 +1,44 @@
-# Yoga Pose Recognition using Convolutional Neural Networks
+# YogZen-Model
 
-## Introduction
-This project aims to recognize yoga poses using Convolutional Neural Networks (CNNs). It utilizes image data of various yoga poses and trains a CNN model to classify them accurately.
+This repository contains the yoga pose detection model used in **[YogZen](https://github.com/DhairyaCodes/Yogzen_app)**, a wellness app designed to help users practice yoga with AI-powered guidance. YogZen leverages pose recognition technology to provide real-time feedback and gamify the yoga experience.
 
-## Dataset
-The dataset consists of images of different yoga poses, including Adho Mukha Svanasana, Adho Mukha Vrksasana, Alanasana, Anjaneyasana, and Ardha Chandrasana. These images are preprocessed and resized to a standard size before being used for training.
+## Model Details
+- **Base Model**: MobileNetV2 (pre-trained on ImageNet)
+- **Input Shape**: (256, 256, 3)
+- **Accuracy Achieved**: 96.81%
 
-## Model Architecture
-The CNN model architecture comprises several convolutional and pooling layers followed by fully connected layers. Data augmentation techniques such as random flipping, rotation, and zooming are applied to improve model generalization.
-
-## Training
-The model is trained using the Adam optimizer and sparse categorical cross-entropy loss function. The training data is split into training and validation sets, and the model is trained for a specified number of epochs.
-
-## Evaluation
-The trained model is evaluated using a separate test set to assess its performance in recognizing yoga poses. Metrics such as loss and accuracy are computed to evaluate the model's effectiveness.
-
-## Results
-The model achieves close to 80% accuracy on the test set, demonstrating its ability to classify yoga poses accurately.
+## Detected Yoga Poses
+The model is trained to recognize the following yoga poses:
+- **Downdog**
+- **Goddess**
+- **Plank**
+- **Tree**
+- **Warrior**
 
 ## Usage
-To use the model for inference, simply provide an image of a yoga pose to the trained model, and it will predict the corresponding pose.
+To use this model for inference or fine-tuning:
 
-## Conclusion
-This project demonstrates the effectiveness of CNNs in recognizing yoga poses. The trained model can be used as a tool to assist yoga practitioners in improving their posture and form.
+```python
+from tensorflow.keras.models import load_model
+import numpy as np
+import cv2
+
+# Load the trained model
+model = load_model("yogzen_model.h5")
+
+# Preprocess image
+img = cv2.imread("path_to_image.jpg")
+img = cv2.resize(img, (256, 256))
+img = img / 255.0  # Normalize
+img = np.expand_dims(img, axis=0)
+
+# Make prediction
+predictions = model.predict(img)
+class_idx = np.argmax(predictions)
+classes = ['downdog', 'goddess', 'plank', 'tree', 'warrior']
+print(f"Predicted Pose: {classes[class_idx]}")
+```
+
+---
+Feel free to contribute or use this model for your own yoga-based applications!
+
